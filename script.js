@@ -1,8 +1,8 @@
 
 //doors
-let doorImage1 = document.querySelector('#door1')
-let doorImage2 = document.querySelector('#door2')
-let doorImage3 = document.querySelector('#door3')
+let doorImage1 = document.querySelector('#door1');
+let doorImage2 = document.querySelector('#door2');
+let doorImage3 = document.querySelector('#door3');
 
 
 
@@ -14,7 +14,17 @@ let openDoor3 = ''
 
 let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/closed_door.svg'
 
-const startButton = document.querySelector('#start')
+const startButton = document.querySelector('#start');
+
+let currentlyPlaying = true;
+
+const isBot = (door) => {
+    if (door.scr === botDoorPath) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //play function
 const isClicked = (door) => {
@@ -26,11 +36,13 @@ const isClicked = (door) => {
 
 }
 
-const playDoor = () => {
+const playDoor = (door) => {
     numClosedDoors--;
     
     if (numClosedDoors===0) {
         gameOver('win');
+    } else if (isBot(door)) {
+        gameOver();
     }
 }
 
@@ -64,35 +76,59 @@ const spaceDoorPath = 'https://content.codecademy.com/projects/chore-door/images
 
 
 //doors
-if(!isClicked(doorImage1)) {
-    doorImage1.onclick = () => {
+ doorImage1.onclick = () => {
+    if(currentlyPlaying && !isClicked(doorImage1)) {
         doorImage1.src = openDoor1;
-        playDoor();
-    }
+        playDoor(doorImage1);
+    } 
 }
 
-if(!isClicked(doorImage2)) {
-    doorImage2.onclick = () => {
+doorImage2.onclick = () => {
+    if(currentlyPlaying && !isClicked(doorImage2)) {
         doorImage2.src = openDoor2;
-        playDoor();
+        playDoor(doorImage2);
+    } 
+}
+
+doorImage3.onclick = () => {
+    if(currentlyPlaying && !isClicked(doorImage3)) {
+        doorImage3.src = openDoor3;
+        playDoor(doorImage3);
+    } 
+}
+
+function startRound() {
+    doorImage1.src = closedDoorPath;
+    doorImage2.src = closedDoorPath;
+    doorImage3.src = closedDoorPath;
+    numClosedDoors = 3;
+    startButton.textContent = 'Good luck!';
+    currentlyPlaying = true;
+    randomChoreDoorGenerator();
+    
+}
+
+startButton.onclick = () => {
+    if(!currentlyPlaying){
+        startRound();
     }
 }
 
-if(!isClicked(doorImage2)) {
-    doorImage3.onclick = () => {
-        doorImage3.src = openDoor3;
-        playDoor();
-    
-    }
-}
+
 
 const gameOver = (status) => {
     if(status === 'win') {
         startButton.textContent = 'You win! Play again?';
+    } else {
+        startButton.textContent = 'Game over! Play again?';
     }
 
+currentlyPlaying = false;
 }
 
 
-randomChoreDoorGenerator()
+
+
+//randomChoreDoorGenerator()
+startRound();
 
