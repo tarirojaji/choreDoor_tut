@@ -1,0 +1,9 @@
+body {
+    background-color: tan;
+    margin: 0px;
+  }
+
+  #door1 {
+      cursor: pointer;
+  }
+  
