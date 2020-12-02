@@ -14,7 +14,7 @@ let openDoor3 = ''
 
 let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/closed_door.svg'
 
-startButton
+const startButton = document.querySelector('#start')
 
 //play function
 const isClicked = (door) => {
@@ -30,7 +30,7 @@ const playDoor = () => {
     numClosedDoors--;
     
     if (numClosedDoors===0) {
-        gameOver();
+        gameOver('win');
     }
 }
 
@@ -86,7 +86,10 @@ if(!isClicked(doorImage2)) {
     }
 }
 
-const gameOver = () => {
+const gameOver = (status) => {
+    if(status === 'win') {
+        startButton.textContent = 'You win! Play again?';
+    }
 
 }
 
