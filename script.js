@@ -5,13 +5,37 @@ let doorImage2 = document.querySelector('#door2')
 let doorImage3 = document.querySelector('#door3')
 
 
-//randomize chorebot
+
 let numClosedDoors = 3;
 
 let openDoor1 = ''
 let openDoor2 = ''
 let openDoor3 = ''
 
+let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/closed_door.svg'
+
+startButton
+
+//play function
+const isClicked = (door) => {
+    if (door.src === closedDoorPath) {
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+const playDoor = () => {
+    numClosedDoors--;
+    
+    if (numClosedDoors===0) {
+        gameOver();
+    }
+}
+
+
+//randomize chorebot
 const randomChoreDoorGenerator = () => {
     const choreDoor = Math.floor(Math.random() * numClosedDoors);
 
@@ -40,20 +64,32 @@ const spaceDoorPath = 'https://content.codecademy.com/projects/chore-door/images
 
 
 //doors
-doorImage1.onclick = () => {
-    doorImage1.src = openDoor1;
+if(!isClicked(doorImage1)) {
+    doorImage1.onclick = () => {
+        doorImage1.src = openDoor1;
+        playDoor();
+    }
+}
+
+if(!isClicked(doorImage2)) {
+    doorImage2.onclick = () => {
+        doorImage2.src = openDoor2;
+        playDoor();
+    }
+}
+
+if(!isClicked(doorImage2)) {
+    doorImage3.onclick = () => {
+        doorImage3.src = openDoor3;
+        playDoor();
+    
+    }
+}
+
+const gameOver = () => {
 
 }
 
-doorImage2.onclick = () => {
-    doorImage2.src = openDoor2;
-
-}
-
-doorImage3.onclick = () => {
-    doorImage3.src = openDoor3;
-
-}
 
 randomChoreDoorGenerator()
 
