@@ -48,3 +48,18 @@ body {
     cursor: pointer;
     padding: 10px;
 }
+
+.start-row {
+    margin: auto;
+    width: 120px;
+    height: 43px;
+    font-family: futura;
+    font-size: 18px;
+    background-color: yellowgreen;
+    padding-top: 18px;
+    text-align: center;
+    color: slateblue;
+    margin-bottom: 21px;
+    cursor: pointer;
+
+}
